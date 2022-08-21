@@ -15,6 +15,11 @@ const {userJoin} = require('./utils/users');
 app.use((cors()))
 app.use(express.json())
 app.use(morgan('dev'))
+app.use('/auth', createUserRoutes)
+app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
+app.use('/api', userRoutes)
+app.use('/api', createServerRoute)
+app.use('/api', messagesRoute)
 
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 
@@ -27,20 +32,18 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true,
 })
     .then(() => {
-        console.log('DB Connection Succesfull')
+        console.log('DB Connection Succesfull');
+
+        app.listen(process.env.PORT, () => {
+          console.log(`Server running on port ${process.env.PORT}`)
+        })
     })
     .catch((err) => {
         console.log(err.message)
     })
 
-app.use('/auth', createUserRoutes)
-app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
-app.use('/api', userRoutes)
-app.use('/api', createServerRoute)
-app.use('/api', messagesRoute)
-const server = app.listen(process.env.PORT, () => {
-    console.log(`Server Started on Port ${process.env.PORT}`)
-})
+
+
 
 const io = socket(server, {
     cors: {
