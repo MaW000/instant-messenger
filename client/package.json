@@ -54,5 +54,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://instant-messenger-mongodb.herokuapp.com/"
+  "proxy": "https://localhost:5000"
 }
