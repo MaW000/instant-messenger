@@ -21,19 +21,7 @@ app.use('/api', userRoutes)
 app.use('/api', createServerRoute)
 app.use('/api', messagesRoute)
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", CLIENT_ORIGIN);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
-  res.header("Access-Control-Allow-Credentials", true); 
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
-  }
-  next();
-});
+
 
 
 app.use(express.static(path.resolve(__dirname, "./client/build")));
@@ -53,7 +41,7 @@ mongoose.connect(process.env.MONGO_URI, {
         console.log(err.message)
     })
 
-    const server = app.listen(process.env.PORT, () => {
+    const server = app.listen(5000, () => {
       console.log(`Server Started on Port ${process.env.PORT}`)
   })
 
@@ -61,7 +49,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 const io = socket(server, {
     cors: {
-        origin:'http://localhost:5001',
+        origin:'http://localhost:3000',
         credentials: true,
     },
 })
