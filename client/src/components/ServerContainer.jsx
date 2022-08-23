@@ -12,7 +12,7 @@ export default function ChatContainer({currentChat, currentUser, socket}) {
   
   let username = currentUser.username
   let room = currentChat.server
-  socket.current = io(host)
+  socket.current = io()
   useEffect(() => {
     const getMessages = async() => {
         

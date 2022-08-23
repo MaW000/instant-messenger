@@ -1,4 +1,3 @@
-export const host = 'http://localhost:5000'
 export const registerRoute = `/auth/register`
 export const loginRoute = `/auth/login` 
 export const allUsersRoute = `/api/allusers`
