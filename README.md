@@ -2,6 +2,9 @@
 
 This is a instant messgeing webb app that was built using React, styled with CSS, and deployed on heroku.
 I used MongoDB to store data permanently in a backend and Socket.IO to receive messeges live.
+I used JSON web token and Bcrypt for authentication. 
+
+Live Site: https://instant-messenger-mongodb.herokuapp.com/
 
 # Getting Started with Create React App
 
